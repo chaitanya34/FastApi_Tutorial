@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Path
-from students import get_student, get_student_name, get_student_by_name, get_student_with_id_and_name
-
+from students import get_student, get_student_name, get_student_by_name, get_student_with_id_and_name, list_students, append_student
+from student_model import Student
 app = FastAPI()
 
 @app.get("/")
@@ -41,3 +41,14 @@ def get_student_detail_by_name(name: str = "chaitanya"):
 @app.get("/getStudentDetailByIdName/{student_id}")
 def get_student_detail_with_id_name(student_id: int, name: str):
     return get_student_with_id_and_name(student_id, name)
+
+
+@app.get("/listAllStudents")
+def list_all_students():
+    return list_students()
+
+
+# Post methods
+@app.post("/addStudent/{student_id}")
+def add_student(student_id: int, student: Student):
+    return append_student(student_id, student)

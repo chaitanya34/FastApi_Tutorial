@@ -36,3 +36,12 @@ def get_student_name(id: int) -> str:
     if id in students:
         return students[id]["name"]
     return {"status": "student not found"}
+
+def list_students():
+    return {"students": list(students.values())}
+
+def append_student(student_id, student):
+    if student_id in students:
+        return {"status": "Student aleady exists"}
+    students[student_id] = student
+    return {"status": "Student added."}
