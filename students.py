@@ -2,6 +2,9 @@
 This file will be used as database
 """
 
+from models.update_student_model import UpdateStudent
+
+
 students = {
     1: {"name":"chaitanya", 
         "age":25,
@@ -36,3 +39,27 @@ def get_student_name(id: int) -> str:
     if id in students:
         return students[id]["name"]
     return {"status": "student not found"}
+
+def list_students():
+    return {"students": list(students.values())}
+
+def append_student(student_id, student):
+    if student_id in students:
+        return {"status": "Student aleady exists"}
+    students[student_id] = student
+    return {"status": "Student added."}
+
+def update_student_with_id(student_id, student: UpdateStudent):
+    if student_id not in students:
+        return {"status": f"Student {student_id} not exists"}
+
+    if student.age != None:
+        students[student_id].age = student.age
+
+    if student.name != None:
+        students[student_id].name = student.name
+    
+    if student.education != None:
+        students[student_id].education = student.education
+
+    return {"status": "successful"}
