@@ -11,6 +11,12 @@ students = {
         "education": "IITB"}
 }
 
+def get_student_by_name(name:str) -> dict:
+    for student_id, student in students.items():
+        if student["name"] == name:
+            return student
+    return {"status": "Student not found"}
+
 
 def get_student(id: int) -> dict:
     if id in students:
