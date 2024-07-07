@@ -11,6 +11,13 @@ students = {
         "education": "IITB"}
 }
 
+def get_student_with_id_and_name(student_id, name):
+    if student_id in students:
+        student = students[student_id]
+        if student["name"] == name:
+            return student
+    return {"status": "data not matching"}
+
 def get_student_by_name(name:str) -> dict:
     for student_id, student in students.items():
         if student["name"] == name:
