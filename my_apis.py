@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Path
-from students import get_student, get_student_name, get_student_by_name
+from students import get_student, get_student_name, get_student_by_name, get_student_with_id_and_name
 
 app = FastAPI()
 
@@ -35,3 +35,9 @@ def get_student_detail_by_name(name: str = "chaitanya"):
     arguments are treated as query param, if you want to make them as optional provide default values
     """
     return get_student_by_name(name)
+
+# Combining Path param and query param
+# Dont create the same path name though you have different set of arguments, fast api is taking the latest endpoint
+@app.get("/getStudentDetailByIdName/{student_id}")
+def get_student_detail_with_id_name(student_id: int, name: str):
+    return get_student_with_id_and_name(student_id, name)
